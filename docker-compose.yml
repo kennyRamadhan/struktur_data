@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    container_name: struktur-data-playground
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    environment:
+      JWT_SECRET: ganti-dengan-rahasia-yang-panjang
+    volumes:
+      - app-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  app-data:
