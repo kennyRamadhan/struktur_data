@@ -65,20 +65,18 @@ function syncMembers(db) {
 
   const usernames = members.map((m) => m.username);
   const placeholders = usernames.map(() => '?').join(', ');
-  const upsert = db.prepare(`
-    INSERT INTO users (username, password_hash, name, nim)
-    VALUES (?, ?, ?, ?)
-    ON CONFLICT(username) DO UPDATE SET
-      password_hash = excluded.password_hash,
-      name = excluded.name,
-      nim = excluded.nim
-  `);
+  // Sengaja tidak memakai INSERT ... ON CONFLICT DO UPDATE: trigger BEFORE INSERT
+  // tetap berjalan pada upsert, sehingga saat sudah ada 4 user, update pun ditolak.
+  const update = db.prepare('UPDATE users SET password_hash = ?, name = ?, nim = ? WHERE username = ?');
+  const insert = db.prepare('INSERT INTO users (username, password_hash, name, nim) VALUES (?, ?, ?, ?)');
 
   db.exec('BEGIN');
   try {
     db.prepare(`DELETE FROM users WHERE username NOT IN (${placeholders})`).run(...usernames);
     for (const m of members) {
-      upsert.run(m.username, bcrypt.hashSync(m.password, 10), m.name, m.nim);
+      const hash = bcrypt.hashSync(m.password, 10);
+      const { changes } = update.run(hash, m.name, m.nim, m.username);
+      if (changes === 0) insert.run(m.username, hash, m.name, m.nim);
     }
     db.exec('COMMIT');
   } catch (err) {
