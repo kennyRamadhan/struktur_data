@@ -221,7 +221,7 @@ node -e "const {DatabaseSync}=require('node:sqlite');const db=new DatabaseSync('
 ## 6. Referensi API
 
 Base URL: `http://localhost:3000/api`. Semua body dan respons berformat JSON.
-Selain `POST /auth/login`, semua endpoint membutuhkan header:
+Selain `POST /auth/login` dan `GET /auth/team`, semua endpoint membutuhkan header:
 
 ```
 Authorization: Bearer <token>
@@ -233,16 +233,16 @@ Authorization: Bearer <token>
 
 ```json
 // request
-{ "username": "anggota1", "password": "anggota1" }
+{ "username": "312510195", "password": "312510195" }
 
 // 200 OK
-{ "token": "eyJhbGciOi...", "user": { "id": 1, "username": "anggota1", "name": "Anggota Satu", "nim": "0000000001" } }
+{ "token": "eyJhbGciOi...", "user": { "id": 1, "username": "312510195", "name": "Kenny Ramadhan", "nim": "312510195" } }
 
 // 401
 { "error": "Username atau password salah" }
 ```
 
-**`GET /auth/me`**: data user dari token. **`GET /auth/members`**: daftar 4 anggota (`id`, `name`, `nim`).
+**`GET /auth/me`**: data user dari token. **`GET /auth/members`**: daftar 4 anggota (`id`, `name`, `nim`). **`GET /auth/team`** (publik): nama-nama anggota saja, ditampilkan di halaman login dan footer. NIM sengaja tidak disertakan karena dipakai sebagai username.
 
 ### Stack & Queue
 
@@ -308,7 +308,7 @@ Pembatasan "hanya 4 orang yang bisa login" diterapkan berlapis:
 Langkah keamanan lain:
 
 - Password disimpan sebagai **hash bcrypt** (cost 10), tidak pernah dalam teks biasa.
-- Semua endpoint selain login dilindungi middleware **JWT** (`middleware/auth.js`). Token berlaku 8 jam.
+- Semua endpoint selain login dan daftar nama anggota dilindungi middleware **JWT** (`middleware/auth.js`). Token berlaku 8 jam.
 - Semua query SQL memakai **prepared statement**, sehingga aman dari SQL injection.
 - Panjang input dibatasi di server, tidak hanya di form frontend.
 

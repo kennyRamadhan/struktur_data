@@ -8,12 +8,17 @@ import { useEffect, useState } from 'react';
 export default function StepPlayer({ steps, render, interval = 900, footer = null }) {
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
+  const [prevSteps, setPrevSteps] = useState(steps);
   const last = steps.length - 1;
 
-  useEffect(() => {
+  // Demo dijalankan ulang → mulai lagi dari langkah pertama.
+  // Direset saat render (bukan di useEffect) agar index lama yang
+  // melebihi jumlah langkah baru tidak sempat dipakai.
+  if (steps !== prevSteps) {
+    setPrevSteps(steps);
     setIndex(0);
     setPlaying(true);
-  }, [steps]);
+  }
 
   useEffect(() => {
     if (!playing) return;
@@ -26,7 +31,7 @@ export default function StepPlayer({ steps, render, interval = 900, footer = nul
   }, [playing, index, last, interval]);
 
   if (steps.length === 0) return null;
-  const step = steps[index];
+  const step = steps[Math.min(index, last)];
 
   const go = (i) => {
     setPlaying(false);

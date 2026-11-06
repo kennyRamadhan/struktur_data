@@ -27,6 +27,12 @@ export default function authRoutes(db) {
     res.json({ user: { id, username, name, nim } });
   });
 
+  // Publik (untuk halaman login): hanya nama, tanpa NIM karena NIM dipakai untuk login.
+  router.get('/team', (req, res) => {
+    const rows = db.prepare('SELECT name FROM users ORDER BY id').all();
+    res.json({ team: rows.map((r) => r.name) });
+  });
+
   router.get('/members', requireAuth, (req, res) => {
     const rows = db.prepare('SELECT id, name, nim FROM users ORDER BY id').all();
     res.json({ members: rows });

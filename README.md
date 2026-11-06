@@ -17,15 +17,16 @@ Dibuat untuk tugas mata kuliah Struktur Data.
 | [Teori Stack & Queue](docs/TEORI.md) | Konsep LIFO/FIFO, operasi, overflow/underflow, circular queue, kompleksitas, penerapan |
 | [Panduan Penggunaan](docs/PANDUAN-PENGGUNAAN.md) | Cara memakai setiap halaman (dengan screenshot) dan skenario demo untuk presentasi |
 | [Arsitektur & API](docs/ARSITEKTUR.md) | Arsitektur, alur request, skema database, referensi API, keamanan, pengujian, Docker |
+| [**Laporan (PDF)**](docs/Laporan-Struktur-Data-Playground.pdf) | Laporan tugas lengkap: pendahuluan, teori, perancangan, hasil web dari login sampai semua menu, pengujian, penutup |
 
 ## Anggota Kelompok
 
 | No | Nama | NIM | Username | Password |
 |----|------|-----|----------|----------|
-| 1 | Anggota Satu | 0000000001 | `anggota1` | `anggota1` |
-| 2 | Anggota Dua | 0000000002 | `anggota2` | `anggota2` |
-| 3 | Anggota Tiga | 0000000003 | `anggota3` | `anggota3` |
-| 4 | Anggota Empat | 0000000004 | `anggota4` | `anggota4` |
+| 1 | Kenny Ramadhan | 312510195 | `312510195` | `312510195` |
+| 2 | Ariq Firmansyah | 312510176 | `312510176` | `312510176` |
+| 3 | Muhammad Ryno Al Faridz | 312510022 | `312510022` | `312510022` |
+| 4 | Dwi Afandi | 312510100 | `312510100` | `312510100` |
 
 > Hanya 4 akun di atas yang bisa login. Tidak ada fitur registrasi, dan database menolak penambahan user ke-5
 > (lihat trigger `limit_users` di `server/src/db.js`). Daftar akun diatur di
@@ -151,13 +152,14 @@ File database dibuat otomatis saat server pertama kali dijalankan: `server/data/
 
 ## API
 
-Semua endpoint selain `/api/auth/login` membutuhkan header `Authorization: Bearer <token>`.
+Semua endpoint selain `/api/auth/login` dan `/api/auth/team` membutuhkan header `Authorization: Bearer <token>`.
 
 | Method | Endpoint | Keterangan |
 |--------|----------|------------|
 | POST | `/api/auth/login` | Login, mengembalikan token JWT |
 | GET | `/api/auth/me` | Data user yang sedang login |
-| GET | `/api/auth/members` | Daftar anggota kelompok |
+| GET | `/api/auth/team` | Nama-nama anggota (publik, untuk halaman login) |
+| GET | `/api/auth/members` | Daftar anggota kelompok beserta NIM |
 | GET | `/api/stack` | State stack + riwayat |
 | POST | `/api/stack/push` · `/pop` · `/peek` · `/clear` | Operasi stack |
 | GET | `/api/queue` | State queue + riwayat |

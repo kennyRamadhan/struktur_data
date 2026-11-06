@@ -1,15 +1,15 @@
 /**
  * DAFTAR ANGGOTA KELOMPOK — hanya 4 orang ini yang bisa login.
  *
- * Ubah nama, NIM, username, dan password sesuai anggota kelompok.
+ * Login memakai NIM sebagai username dan password.
  * Setiap server dijalankan, tabel `users` di SQLite disinkronkan
  * dengan daftar ini (password disimpan dalam bentuk hash bcrypt).
  */
 const members = [
-  { name: 'Anggota Satu', nim: '0000000001', username: 'anggota1', password: 'anggota1' },
-  { name: 'Anggota Dua', nim: '0000000002', username: 'anggota2', password: 'anggota2' },
-  { name: 'Anggota Tiga', nim: '0000000003', username: 'anggota3', password: 'anggota3' },
-  { name: 'Anggota Empat', nim: '0000000004', username: 'anggota4', password: 'anggota4' },
+  { name: 'Kenny Ramadhan', nim: '312510195', username: '312510195', password: '312510195' },
+  { name: 'Ariq Firmansyah', nim: '312510176', username: '312510176', password: '312510176' },
+  { name: 'Muhammad Ryno Al Faridz', nim: '312510022', username: '312510022', password: '312510022' },
+  { name: 'Dwi Afandi', nim: '312510100', username: '312510100', password: '312510100' },
 ];
 
 export default members;

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth.jsx';
+import { useTeam } from '../useTeam.js';
 
 export default function Login() {
   const { user, login } = useAuth();
+  const team = useTeam();
   const navigate = useNavigate();
   const location = useLocation();
   const [username, setUsername] = useState('');
@@ -41,6 +43,16 @@ export default function Login() {
           <span>Playground</span>
         </h1>
         <p>Visualisasi interaktif Stack (LIFO) dan Queue (FIFO).</p>
+        {team.length > 0 && (
+          <div className="hero-team">
+            <span>Disusun oleh</span>
+            <ul>
+              {team.map((name) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </section>
 
       <section className="login-panel">
@@ -49,18 +61,18 @@ export default function Login() {
           <p className="muted small">Hanya anggota kelompok yang terdaftar yang dapat masuk.</p>
 
           <label className="field">
-            <span>Username</span>
+            <span>Username (NIM)</span>
             <input
               autoFocus
               autoComplete="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="contoh: anggota1"
+              placeholder="NIM, contoh: 312510195"
               required
             />
           </label>
           <label className="field">
-            <span>Password</span>
+            <span>Password (NIM)</span>
             <input
               type="password"
               autoComplete="current-password"

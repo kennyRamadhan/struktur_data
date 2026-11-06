@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../auth.jsx';
+import { useTeam } from '../useTeam.js';
 
 const NAV = [
   { to: '/', label: 'Menu Utama', end: true },
@@ -10,6 +11,7 @@ const NAV = [
 
 export default function Layout() {
   const { user, logout } = useAuth();
+  const team = useTeam();
 
   return (
     <div className="app">
@@ -40,7 +42,11 @@ export default function Layout() {
       <main className="container">
         <Outlet />
       </main>
-      <footer className="footer">Tugas Struktur Data · React + Node.js + SQLite</footer>
+      <footer className="footer">
+        <strong>Tugas Struktur Data</strong>
+        {team.length > 0 && <span>Kelompok: {team.join(' · ')}</span>}
+        <span>React + Node.js + SQLite</span>
+      </footer>
     </div>
   );
 }
