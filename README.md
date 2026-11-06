@@ -17,7 +17,7 @@ Dibuat untuk tugas mata kuliah Struktur Data.
 | [Teori Stack & Queue](docs/TEORI.md) | Konsep LIFO/FIFO, operasi, overflow/underflow, circular queue, kompleksitas, penerapan |
 | [Panduan Penggunaan](docs/PANDUAN-PENGGUNAAN.md) | Cara memakai setiap halaman (dengan screenshot) dan skenario demo untuk presentasi |
 | [Arsitektur & API](docs/ARSITEKTUR.md) | Arsitektur, alur request, skema database, referensi API, keamanan, pengujian, Docker |
-| [**Laporan (PDF)**](docs/Laporan-Struktur-Data-Playground.pdf) | Laporan tugas lengkap: pendahuluan, teori, perancangan, hasil web dari login sampai semua menu, pengujian, penutup |
+| [**Laporan (PDF)**](docs/LAPORAN%20UTS%20STRUKTUR%20DATA.pdf) | Laporan tugas lengkap: pendahuluan, teori, perancangan, hasil web dari login sampai semua menu, pengujian, penutup |
 
 ## Anggota Kelompok
 
